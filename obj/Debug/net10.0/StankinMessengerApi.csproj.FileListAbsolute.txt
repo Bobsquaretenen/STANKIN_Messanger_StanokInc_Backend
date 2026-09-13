@@ -31,3 +31,8 @@ D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net1
 D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\StankinMessengerApi.pdb
 D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\StankinMessengerApi.genruntimeconfig.cache
 D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\ref\StankinMessengerApi.dll
+D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\StankinMessengerApi.sourcelink.json
+D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\bin\Debug\net10.0\StankinMessengerApi.staticwebassets.runtime.json
+D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\nyngip8lmf-{0}-k0wg47gqjl-k0wg47gqjl.gz
+D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\wvnibkpm2d-{0}-8avloqiiob-8avloqiiob.gz
+D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\w8pqwmbzn6-{0}-sigd3hq0tn-sigd3hq0tn.gz

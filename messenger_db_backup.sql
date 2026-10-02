@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict qWhtR0haIl5hjY5sLvQRqNWOve2KVpq7tstChlZ2BzdoGUvAlPHGyBKKxZgFw07
+\restrict 15ZN59rQBpvf9wvZgTnCKoq3es1XcrSogpwahBDcCF1UIgbjhaXHdbpN5sJkdZ5
 
 -- Dumped from database version 18.6 (Debian 18.6-1.pgdg13+2)
 -- Dumped by pg_dump version 18.6 (Debian 18.6-1.pgdg13+2)
@@ -116,16 +116,12 @@ CREATE TABLE public.users (
     id_user integer NOT NULL,
     login character varying(20) NOT NULL,
     password_hash text NOT NULL,
-    name character varying(20),
-    surname character varying(20),
-    patronymic character varying(20),
+    full_name character varying(60),
     study_group character(9),
     role text NOT NULL,
-    CONSTRAINT users_name_format CHECK (((name IS NULL) OR ((name)::text ~ '^[А-Яа-яЁё][А-Яа-яЁё -]*$'::text))),
-    CONSTRAINT users_patronymic_format CHECK (((patronymic IS NULL) OR ((patronymic)::text ~ '^[А-Яа-яЁё][А-Яа-яЁё -]*$'::text))),
+    CONSTRAINT users_name_format CHECK (((full_name IS NULL) OR ((full_name)::text ~ '^[А-Яа-яЁё][А-Яа-яЁё -]*$'::text))),
     CONSTRAINT users_role_check CHECK ((role = ANY (ARRAY['admin'::text, 'teacher'::text, 'student'::text]))),
-    CONSTRAINT users_study_group_format CHECK (((study_group IS NULL) OR (study_group ~ '^[А-Я]{3}-[0-9]{2}-[0-9]{2}$'::text))),
-    CONSTRAINT users_surname_format CHECK (((surname IS NULL) OR ((surname)::text ~ '^[А-Яа-яЁё][А-Яа-яЁё -]*$'::text)))
+    CONSTRAINT users_study_group_format CHECK (((study_group IS NULL) OR (study_group ~ '^[А-Я]{3}-[0-9]{2}-[0-9]{2}$'::text)))
 );
 
 
@@ -202,7 +198,7 @@ COPY public.message (id_message, id_chat, id_user, dispatch_time, info) FROM std
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (id_user, login, password_hash, name, surname, patronymic, study_group, role) FROM stdin;
+COPY public.users (id_user, login, password_hash, full_name, study_group, role) FROM stdin;
 \.
 
 
@@ -224,7 +220,7 @@ SELECT pg_catalog.setval('public.message_id_message_seq', 1, false);
 -- Name: users_id_user_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_user_seq', 5, true);
+SELECT pg_catalog.setval('public.users_id_user_seq', 13, true);
 
 
 --
@@ -311,5 +307,5 @@ ALTER TABLE ONLY public.message
 -- PostgreSQL database dump complete
 --
 
-\unrestrict qWhtR0haIl5hjY5sLvQRqNWOve2KVpq7tstChlZ2BzdoGUvAlPHGyBKKxZgFw07
+\unrestrict 15ZN59rQBpvf9wvZgTnCKoq3es1XcrSogpwahBDcCF1UIgbjhaXHdbpN5sJkdZ5
 

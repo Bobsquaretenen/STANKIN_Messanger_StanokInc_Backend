@@ -35,11 +35,11 @@ D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net1
 D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\StankinMessengerApi.pdb
 D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\StankinMessengerApi.genruntimeconfig.cache
 D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\ref\StankinMessengerApi.dll
-D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\u6a81mw8au-{0}-w3ia97zg3x-w3ia97zg3x.gz
 D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\gvwyh0y8nt-{0}-05acehwvjh-05acehwvjh.gz
-D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\e5gxitc1yr-{0}-kqxrz8lvft-kqxrz8lvft.gz
 D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\2qkhhg24vg-{0}-qtfohcrv4x-qtfohcrv4x.gz
-D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\nyngip8lmf-{0}-b0nnu7xkqx-b0nnu7xkqx.gz
-D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\ksjj0mszgi-{0}-0vvcz2w4zp-0vvcz2w4zp.gz
-D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\j08luf7yz5-{0}-ci86g4ac6a-ci86g4ac6a.gz
 D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\zgilhc5zma-{0}-9t32236go0-9t32236go0.gz
+D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\j08luf7yz5-{0}-aaqrma9em7-aaqrma9em7.gz
+D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\u6a81mw8au-{0}-0j6okx97j9-0j6okx97j9.gz
+D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\e5gxitc1yr-{0}-xjb5cngqwd-xjb5cngqwd.gz
+D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\nyngip8lmf-{0}-mu0h32yx4g-mu0h32yx4g.gz
+D:\Rider\Projects\NewProject\StankinMessenger\StankinMessengerApi\obj\Debug\net10.0\compressed\ksjj0mszgi-{0}-y63exwgsd1-y63exwgsd1.gz

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StankinMessengerApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5edf4e0cc872abee98b9398785389258ae6b3289")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b422400dbdc3fbb489b617774e59fb4e2144fed")]
 [assembly: System.Reflection.AssemblyProductAttribute("StankinMessengerApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StankinMessengerApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,6 +1,6 @@
 @StankinMessengerApi_HostAddress = http://localhost:5230
 
 GET {{StankinMessengerApi_HostAddress}}/weatherforecast/
-Accept: application/json
+Accept: application/json 
 
 ###

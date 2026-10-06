@@ -1,0 +1,50 @@
+﻿# === Build results ===
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+publish/
+publish-*/
+
+# === Visual Studio / Rider / VS Code ===
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.DotSettings.user
+
+# === .NET Core ===
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nupkg
+*.snupkg
+*.nuspec
+*.cache
+
+# === Entity Framework ===
+*.edmx
+Migrations/*.meta
+
+# === Logs ===
+*.log
+logs/
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Secrets ===
+appsettings.Production.json
+appsettings.Local.json
+*.secret.json
+.env

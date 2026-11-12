@@ -8,11 +8,28 @@
     const escapeHtml = s => String(s)
         .replace(/&/g,'&amp;').replace(/</g,'&lt;')
         .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-
+    
     let teachersData = [];
     let groupsData   = [];
     let currentGroupName = null;
     let recentActions = [];
+
+    function showToast(message, type = 'info') {
+        let container = document.getElementById('toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toast-container';
+            document.body.appendChild(container);
+        }
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.textContent = message;
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.classList.add('toast-hide');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
 
     // ---------- Утилиты ----------
     function plural(n, one, few, many) {
@@ -40,15 +57,37 @@
             edit:   { sym:'✎', cls:'text-blue-500' },
             delete: { sym:'−', cls:'text-red-500' }
         };
-        wrap.innerHTML = recentActions.map(a => {
+        wrap.innerHTML = '';
+        recentActions.forEach(a => {
             const ic = icons[a.type] || icons.edit;
-            return '<div class="flex items-start gap-2">' +
-                '<span class="' + ic.cls + ' mt-0.5 text-base">' + ic.sym + '</span>' +
-                '<div class="min-w-0">' +
-                '<p class="font-medium text-gray-800 truncate">' + escapeHtml(a.title) + '</p>' +
-                (a.subtitle ? '<p class="text-gray-400 text-xs truncate">' + escapeHtml(a.subtitle) + '</p>' : '') +
-                '</div></div>';
-        }).join('');
+
+            const container = document.createElement('div');
+            container.className = 'flex items-start gap-2';
+
+            const iconSpan = document.createElement('span');
+            iconSpan.className = ic.cls + ' mt-0.5 text-base';
+            iconSpan.textContent = ic.sym;
+
+            const textWrap = document.createElement('div');
+            textWrap.className = 'min-w-0';
+
+            const titleP = document.createElement('p');
+            titleP.className = 'font-medium text-gray-800 truncate';
+            titleP.textContent = a.title;
+
+            textWrap.appendChild(titleP);
+
+            if (a.subtitle) {
+                const subP = document.createElement('p');
+                subP.className = 'text-gray-400 text-xs truncate';
+                subP.textContent = a.subtitle;
+                textWrap.appendChild(subP);
+            }
+
+            container.appendChild(iconSpan);
+            container.appendChild(textWrap);
+            wrap.appendChild(container);
+        });
     }
 
     // ---------- Вкладки ----------
@@ -107,11 +146,31 @@
             filtered.forEach(g => {
                 const tr = document.createElement('tr');
                 tr.className = 'border-b border-white/30 hover:bg-white/40 transition-colors cursor-pointer';
-                tr.innerHTML =
-                    '<td class="p-4"><input type="checkbox" class="group-checkbox rounded"></td>' +
-                    '<td class="p-4 font-medium text-primary">' + escapeHtml(g.name) + '</td>' +
-                    '<td class="p-4 text-green-700">' + g.studentsCount + ' студентов</td>' +
-                    '<td class="p-4 text-gray-600">—</td>';
+
+                const td1 = document.createElement('td');
+                td1.className = 'p-4';
+                const cb = document.createElement('input');
+                cb.type = 'checkbox';
+                cb.className = 'group-checkbox rounded';
+                td1.appendChild(cb);
+
+                const td2 = document.createElement('td');
+                td2.className = 'p-4 font-medium text-primary';
+                td2.textContent = g.name;
+
+                const td3 = document.createElement('td');
+                td3.className = 'p-4 text-green-700';
+                td3.textContent = g.studentsCount + ' студентов';
+
+                const td4 = document.createElement('td');
+                td4.className = 'p-4 text-gray-600';
+                td4.textContent = '—';
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                tr.appendChild(td4);
+
                 tr.addEventListener('click', ev => {
                     if (ev.target.type !== 'checkbox') openGroupEdit(g.name);
                 });
@@ -143,7 +202,6 @@
                 const tr = document.createElement('tr');
                 tr.className = 'border-b border-white/30 hover:bg-white/40 transition-colors';
 
-                // 4 ячейки: логин, ФИО, пароль, действие
                 tr.innerHTML =
                     '<td class="p-4 font-mono text-gray-800"></td>' +
                     '<td class="p-4 text-gray-600"></td>' +
@@ -152,13 +210,9 @@
 
                 const cells = tr.querySelectorAll('td');
 
-                // Логин
                 cells[0].textContent = s.login || '—';
-
-                // ФИО
                 cells[1].textContent = s.fullName || '—';
 
-                // Пароль + кнопка показать/скрыть
                 const passWrap = document.createElement('div');
                 passWrap.className = 'flex items-center gap-2';
 
@@ -213,7 +267,6 @@
                 passWrap.appendChild(toggleBtn);
                 cells[2].appendChild(passWrap);
 
-                // Кнопка удаления
                 const delBtn = document.createElement('button');
                 delBtn.type = 'button';
                 delBtn.className = 'text-red-500 hover:text-red-700 text-xs font-medium';
@@ -264,8 +317,6 @@
         const newName = $('#edit-group-input').value.trim();
         if (newName && currentGroupName && newName !== currentGroupName) {
             logAction('edit', 'Изменена группа', currentGroupName + ' → ' + newName);
-            // Переименование реализовать можно отдельным эндпоинтом.
-            // Пока просто обновляем состояние.
         }
         await loadStudyGroups();
         switchTab('groups');
@@ -391,7 +442,6 @@
     }
 
     // ---------- Модалка: добавить преподавателя ---------- 
-
     function showAddTeacherError(message) {
         const el = $('#addTeacherError');
         if (!el) return;
@@ -425,9 +475,22 @@
 
         hideAddTeacherError();
 
-        if (!fullName) { $('#teacherName').focus();     showAddTeacherError('Укажите ФИО.'); return; }
-        if (!login)    { $('#teacherLogin').focus();    showAddTeacherError('Укажите логин.'); return; }
+        // Валидация ФИО
+        if (!fullName) { $('#teacherName').focus(); showAddTeacherError('Укажите ФИО.'); return; }
+        if (fullName.split(/\s+/).length < 2) { $('#teacherName').focus(); showAddTeacherError('ФИО должно содержать минимум имя и фамилию.'); return; }
+        if (!/^[А-Яа-яЁёA-Za-z\s\-]+$/.test(fullName)) { $('#teacherName').focus(); showAddTeacherError('ФИО может содержать только буквы, пробелы и дефисы.'); return; }
+
+        // Валидация логина
+        if (!login) { $('#teacherLogin').focus(); showAddTeacherError('Укажите логин.'); return; }
+        if (!/^[a-zA-Z0-9]{3,20}$/.test(login)) { $('#teacherLogin').focus(); showAddTeacherError('Логин: 3-20 символов, только латиница и цифры, без пробелов.'); return; }
+
+        // Валидация пароля
         if (!password) { $('#teacherPassword').focus(); showAddTeacherError('Укажите пароль.'); return; }
+        if (password.length < 4) { $('#teacherPassword').focus(); showAddTeacherError('Пароль должен содержать минимум 4 символа.'); return; }
+        if (/\s/.test(password)) { $('#teacherPassword').focus(); showAddTeacherError('Пароль не должен содержать пробелов.'); return; }
+
+        // Валидация кафедры
+        if (dept && dept.length > 100) { $('#teacherDept').focus(); showAddTeacherError('Название кафедры слишком длинное (макс. 100 символов).'); return; }
 
         try {
             const res = await fetch('/api/admin/users', {
@@ -470,7 +533,7 @@
     // ---------- Импорт группы ----------
     window.closeImportGroupModal = () => $('#importGroupModal').classList.remove('visible');
     window.submitImportGroup = () => {
-        alert('Импорт из Excel в демо-версии не реализован. Добавьте студентов через API /api/admin/users.');
+        showToast('Импорт из Excel в демо-версии не реализован. Используйте API.', 'info');
         $('#importGroupModal').classList.remove('visible');
     };
     if ($('#importGroupBtn')) {
@@ -486,7 +549,7 @@
         a.addEventListener('click', () => localStorage.removeItem('currentUser'));
     });
 
-    // ---------- Модалка группы (удалена из HTML, но кнопки могут пригодиться) ----------
+    // ---------- Модалка группы ----------
     window.closeAddGroupModal = () => {
         const m = $('#addGroupModal');
         if (m) m.classList.remove('visible');

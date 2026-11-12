@@ -6,8 +6,8 @@
     <title>Вход в аккаунт - СТАНКИН</title>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
     <script>
         tailwind.config = {
             theme: {
@@ -43,13 +43,22 @@
             border-radius: 50%;
             pointer-events: none;
         }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .input-error {
+            border-color: #ef4444 !important;
+            animation: shake 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="font-sans h-screen flex items-center justify-center relative overflow-hidden text-text-main
              bg-[linear-gradient(135deg,#e0e7ff_0%,#f3e8ff_50%,#dbeafe_100%)]">
 
 <div class="absolute top-10 left-10 flex items-center z-10 max-sm:top-5 max-sm:left-5">
-    <img src="logo-stankin.png" alt="СТАНКИН" class="h-[50px] w-auto object-contain">
+    <img src="assets/logo-stankin.png" alt="СТАНКИН" class="h-[50px] w-auto object-contain">
 </div>
 
 <div class="bg-white/70 backdrop-blur-md border border-white/80 rounded-card
@@ -127,7 +136,22 @@
             const errEl    = document.getElementById('loginError');
 
             errEl.classList.add('hidden');
-
+            if (!login) {
+                errEl.textContent = 'Введите логин.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+            if (!/^[a-zA-Z0-9]{3,20}$/.test(login)) {
+                errEl.textContent = 'Логин: 3-20 символов, только латиница и цифры.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+            if (!password) {
+                errEl.textContent = 'Введите пароль.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+            
             try {
                 const res = await fetch('/api/login', {
                     method: 'POST',
